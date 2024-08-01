@@ -6,15 +6,18 @@
 
 /** Database setup for jobly. */
 const { Client } = require("pg");
-const { getDatabaseUri } = require("./config");
+const { supabaseUrl, supabaseKey, getDatabaseUri } = require("./config");
 
 let db;
 
 if (process.env.NODE_ENV === "production") {
   db = new Client({
-    connectionString: getDatabaseUri(),
+    connectionString: supabaseUrl,
     ssl: {
       rejectUnauthorized: false,
+    },
+    headers: {
+      apiKey: supabaseKey,
     },
   });
 } else {
