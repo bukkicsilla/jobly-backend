@@ -12,7 +12,7 @@ let db;
 
 if (process.env.NODE_ENV === "production") {
   db = new Client({
-    connectionString: supabaseUrl,
+    connectionString: getDatabaseUri(),
     ssl: {
       rejectUnauthorized: false,
     },
